@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <template id="material_data" name="Material Website">
+            <t t-call="website.layout">
+                <div class="oe_structure">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7 oe_material">
+                                <div class="row">
+                                    <center><h3>Register Material</h3></center>
+                                    <form role="form" action="/page/creatematerial" method="POST">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        <div class="form-group">
+                                            <label for="code" class="control-label">Material Code</label>
+                                            <input type="text" name="code" t-att-value="code" id="code"
+                                                   class="form-control" placeholder="e.g. M001" required="required"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Material Name</label>
+                                            <input type="text" name="name" t-att-value="name" id="name"
+                                                   class="form-control" placeholder="e.g. Cotton Combat" required="required"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="type" class="control-label">Material Type</label>
+                                            <select name="type" t-att-value="type" id="type"
+                                                   class="form-control" required="required">
+                                                <option value="fabric">Fabric</option>
+                                                <option value="jeans">Jeans</option>
+                                                <option value="cotton">Cotton</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="buy_price" class="control-label">Buy Price</label>
+                                            <input type="number" name="buy_price" t-att-value="buy_price" id="buy_price"
+                                                   class="form-control" placeholder="100" required="required"/>
+                                            <h6 style="color: red;">Note : Buy Price cannot less than 100 !</h6>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="supplier_id" class="control-label">Supplier</label>
+                                            <select id="supplier_id" name="supplier_id" class="form-control">
+                                                <t t-foreach="supplier_rec" t-as="s">
+                                                <option t-att-value="s.id" t-esc="s.name"/></t>
+                                            </select>
+                                        </div>
+                                        <div class="clearfix oe_login_button">
+                                            <button type="submit" class="btn btn-primary pull-left">Create Material</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="material_thanks" name="Thank's!">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <h1>Thanks!</h1>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="alert alert-success" role="status">
+                                    The material has been created successfully!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <record id="menu_web_material" model="website.menu">
+            <field name="name">Material</field>
+            <field name="url">/page/material</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">11</field>
+        </record>
+
+    </data>
+</odoo>

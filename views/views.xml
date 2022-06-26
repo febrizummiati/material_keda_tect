@@ -1,0 +1,69 @@
+<odoo>
+  <data>
+    <!-- Material View -->
+        <record id="material_view_form" model="ir.ui.view">
+          <field name="name">material.keda.form</field>
+          <field name="model">material.keda</field>
+          <field name="arch" type="xml">
+            <form string="Material">
+                <sheet>
+                    <group>
+                        <group>
+                          <field name="code" required="1"/>
+                          <field name="name" required="1"/>
+                          <field name="type" required="1"/>
+                        </group>
+                        <group>
+                          <field name="buy_price" required="1"/>
+                          <field name="supplier_id" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+          </field>
+        </record>
+
+        <!-- material Tree -->
+        <record id="material_view_tree" model="ir.ui.view">
+          <field name="name">material.keda.tree</field>
+          <field name="model">material.keda</field>
+          <field name="arch" type="xml">
+            <tree string="material">
+                  <field name="code"/>
+                  <field name="name"/>
+                  <field name="type"/>
+                  <field name="buy_price"/>
+                  <field name="supplier_id"/>
+            </tree>
+          </field>
+        </record>
+
+         <record model="ir.ui.view" id="material_keda_search_view">
+            <field name="model">material.keda</field>
+            <field name="arch" type="xml">
+                <search string="Logs">
+                    <field name="type" />
+                    <group expand="0" string="Group By">
+                        <filter string="Type" domain="[]" context="{'group_by': 'type'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- material Action -->
+        <record model="ir.actions.act_window" id="action_material">
+            <field name="name">Material</field>
+            <field name="res_model">material.keda</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create New Material
+                </p>
+            </field>
+        </record>
+
+<!--        <menuitem id="menu_material" name="Material" parent="sales_team.menu_sale_config"-->
+<!--                  action="action_material" sequence="1"/>-->
+  </data>
+</odoo>
